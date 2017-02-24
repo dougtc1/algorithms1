@@ -1,0 +1,11 @@
+(*
+ *  Ejercicio 1 del laboratorio 4
+ *
+ *  Descripcion: El siguiente programa pide al usuario el grado
+ *  de un polinomio y se le piden sus coeficientes para imprimir
+ *  el polinomio especificado
+ *  Autor: Douglas Torres
+ *  Ultima modificacion: 21/03/2014
+ *)
+
+program Lab04Ejercicio1;

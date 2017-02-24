@@ -1,0 +1,294 @@
+# 
+# Proyecto-primera_entrega.py
+#
+# Descripcion: Este es un juego llamado "Connect TableroHorizontale dots" en el que dos
+# jugadores, bien sea persona vs maquina o persona vs persona, tratan de
+# completar la mayor cantidad de cuadros en un tablero de dimensiones
+# elegidas por el usuario.
+#
+# Autores:
+# Roberto Camara Carnet:11-10235 Grupo: 46
+# Douglas Torres Carnet:11-11027 Grupo:28
+#
+# Ultima modificacion: ??/06/2014
+#
+
+
+# Importacion de la libreria que permite escoger una posicion a marcar
+# al azar a la computadora
+
+from random import *
+
+# Definicion de Clase que guarda los nombres de los jugadores ivolucrados
+
+class Jugadores:
+	NombreJugador1 = ""
+	NombreJugador2 = ""
+
+grupo = Jugadores()
+
+# Definicio de funciones
+
+################################################################################
+######################## F U N C I O N E S #####################################
+################################################################################
+
+# Definicion de funcion que inicializa los datos del programa
+#------------------------------------------------------------------------------#
+
+def Inicializacion (filas: int, columnas: int) -> (list,list,list):
+
+# Precondicion: filas>=2 and columnas>=2
+
+# Postcondicion: len(TableroHorizontal)==filas*(columnas-1) and len(TableroVertical)==(filas-1)*columnas and \
+# len(TableroCuadros)==(filas-1)*(columnas-1) and all((TableroHorizontal[i][j] == 0) for i in range(filas) \
+# for j in range(columnas-1))and ((TableroVertical[i][j] == 0) for i in range(filas-1) \
+# for j in range(columnas) ((TableroCuadros[i][j] == 0) for i in range(filas-1) for j in range(columnas-1)))
+
+    print ("Esta funcion inicializa los siguientes parametros: TableroHorizontal,TableroVertical,TableroCuadro")
+
+# Definicion de funcion que imprime el tablero cada vez que se modifica
+#------------------------------------------------------------------------------#
+
+def ImprimirTablero(TableroHorizontal: list, TableroVertical: list, TableroCuadros:list) -> (list,list,list):
+
+# Precondicion: len(TableroHorizontal) >=2 and len(TableroVertical) >=2 and len(TableroCuadros) >=2
+
+# Postcondicion: True // Esta funcion no modifica ninguna variable que recibe, solo imprime los tableros en un formato mas amigable para el usuario
+     
+	print ("Esta funcion imprime el tablero de juego en un formato amigable para el usuario")
+	
+
+# Definicion de funcion que permite al jugador 1 hacer su jugada
+#------------------------------------------------------------------------------#
+
+def Jugador1(TableroHorizontal: list,TableroVertical: list,TableroCuadros: list,filas: int,columnas: int,TurnoActual: int) -> (list,list,list,int):
+
+# Precondicion: len(TableroHorizontal)==filas*(columnas-1) and len(TableroVertical)==(filas-1)*columnas and \
+# len(TableroCuadros)==(filas-1)*(columnas-1) and filas>=2 and columnas>=2 and (TurnoActual==2)
+
+# Postcondicion: len(TableroHorizontal)==filas*(columnas-1) and len(TableroVertical)==(filas-1)*columnas and \
+# len(TableroCuadros)==(filas-1)*(columnas-1)
+    
+       
+    turno = True    # Variable que se usa para espeecificar si un jugador puede seguir jugando
+
+    TurnoActual = 1    # Variable que especifica el turno del jugador que esta jugando
+    
+    opcion = 0    # Variable que especifica el tipo de raya que desea marcar el usuario
+
+    print("Esta funcion devuelve las siguientes variables: TableroHorizontal,TableroVertical,TableroCuadros,TurnoActual")
+        
+
+# Definicion de funcion que permite al jugador 2 hacer su jugada
+#------------------------------------------------------------------------------#
+
+def Jugador2(TableroHorizontal: list,TableroVertical: list,TableroCuadros: list,filas: int,columnas: int,TipoJugador: int,TurnoActual: int) -> (list,list,list,int):
+
+# Precondicion: (TipoJugador==1 or TipoJugador==2) and len(TableroHorizontal)==filas*(columnas-1) and \
+# len(TableroVertical)==(filas-1)*columnas and len(TableroCuadros)==(filas-1)*(columnas-1) and \
+# filas>=2 and columnas>=2 and TurnoActual==1
+
+# Postcondicion: len(TableroHorizontal)==filas*(columnas-1) and len(TableroVertical)==(filas-1)*columnas and \
+# len(TableroCuadros)==(filas-1)*(columnas-1)
+
+    turno = True    # Variable que se usa para espeecificar si un jugador puede seguir jugando
+
+    TurnoActual = 2    # Variable que especifica el turno del jugador que esta jugando
+    
+    opcion = 0    # Variable que especifica el tipo de raya que desea marcar el usuario
+            
+    print("Esta funcion devuelve las siguientes variables: TableroHorizontal,TableroVertical,TableroCuadros,TurnoActual")
+
+
+# Definicion de funcion que imprime las instrucciones
+#------------------------------------------------------------------------------#
+        
+def Instruccion () -> (str):
+
+# Precondicion: True 
+
+# Postcondicion: True // Esta funcion simplemente imprime las instrucciones del juego, no modifica ninguna varriable del juego
+
+    print("\n")
+    print ("Cada jugador en su turno debe seleccionar entre dos puntos, \
+horizontales o verticales, para trazar una raya \n")
+
+    print ("El objetivo del juego es completar la mayor cantidad de cuadrados \n")
+
+    print ("Al marcar una raya en el tablero ocurre un cambio de turno a menos \
+que el jugador complete un cuadrado con dicha raya, caso en el que puede volver a jugar \n")
+
+    print ("Al final del juego gana el jugador con mayor cantidad de cuadros marcados \n")
+
+
+# Definicion de funcion que marca una linea horizontal en el tablero
+#------------------------------------------------------------------------------#
+
+def MarcarLineaHorizontal(TableroHorizontal: list) -> (list):
+
+# Precondicion: len(TableroHorizontal) >=2
+
+# Postcondicion: TableroHorizontal[lineafila][lineacolumna] == "1"
+
+    lineafila = 0    # Esta variable especifica la fila en donde va a marcar una linea el jugador que este jugando
+    lineacolumna = 0 # Esta variable especifica la columna en donde va a marcar una linea el jugador que este jugando
+    
+    print ("Esta funcion devuelve la siguiente variable: TableroHorizontal")
+
+
+# Definicion de funcion que marca una linea vertical en el tablero
+#------------------------------------------------------------------------------#
+
+def MarcarLineaVertical(TableroVertical: list) -> (list):
+
+# Precondicion: len(TableroVertical) >=2
+
+# Postcondicion: TableroVertical[lineafila][lineacolumna] == "1"
+    
+    lineafila = 0    # Esta variable especifica la fila en donde va a marcar una linea el jugador que este jugando
+    lineacolumna = 0 # Esta variable especifica la columna en donde va a marcar una linea el jugador que este jugando
+    
+    print ("Esta funcion devuelve la siguiente variable: TableroVertical")
+
+
+# Definicion de funcion que marca un cuadrado en el tablero y dice de que jugador fue  
+#------------------------------------------------------------------------------#
+
+def HacerCuadros(TableroHorizontal: list, TableroVertical: list,TableroCuadros: list,filas: int,columnas: int,jugador: int,turno: bool) -> (list,bool):
+
+# Precondicion:len(TableroHorizontal)==filas*(columnas-1) and len(TableroVertical)==(filas-1)*columnas and \
+# len(TableroCuadros)==(filas-1)*(columnas-1) and filas>=2 and columnas >=2 and (jugador == 1 or jugador == 2) and turno
+
+# Postcondicion: any((TableroCuadros[i][j] == 1) for i in range(filas-1) for j in range(columnas-1) \ 
+# if jugador == 1 and ((TableroHorizontal[i][j] == "1") and (TableroVertical[i][j] == "1") and \
+# (TableroHorizontal[i+1][j] == "1") and (TableroVertical[i][j+1] == "1") and \
+# (TableroCuadros[i][j] != "1") and (TableroCuadros[i][j] != "2"))) or \ 
+# (any((TableroCuadros[i][j] == 2) for i in range(filas-1) for j in range(columnas-1) if jugador == 2 and \
+# ((TableroHorizontal[i][j] == "1") and (TableroVertical[i][j] == "1") and (TableroHorizontal[i+1][j] == "1") \
+# and (TableroVertical[i][j+1] == "1") and (TableroCuadros[i][j] != "1") and (TableroCuadros[i][j] != "2")))
+
+    print("Esta funcion devuelve las siguientes variables: TableroCuadros,turno")
+
+
+# Definicion de funcion que permite cargar una partida especificada por el usuario
+#------------------------------------------------------------------------------#
+
+def CargarPartida(archivo: str) -> (int,int,int,int,str,str,list,list,list):
+
+# Precondicion: archivo == "partida1.txt"
+
+# Postcondicion: filas>=2 and columnas>=2
+
+    print("Esta funcion carga una partida y llama a la funcion inicializar con los valores leidos del archivo")
+
+# Definicion de funcion que guarda una partida
+#------------------------------------------------------------------------------#
+
+def GuardarPartida(archivo) -> (str):
+
+# Precondicion: filas>=2 and columnas>=2
+
+# Postcondicion: archivo == "partida1.txt"
+
+    print("Esta funcion guarda una partida")
+
+
+# Definicion de funcion que imprime el puntaje al momento de la partida
+#------------------------------------------------------------------------------#
+
+def Puntaje(TableroCuadros: list, PuntajeJugador1: int, PuntajeJugador2: int) -> (int,int):
+
+# Precondicion: len(TableroCuadros)>=2 and PuntajeJugador1>=0 and PuntajeJugador2>=0
+
+# Postcondicion: (PuntajeJugador1 == (sum( 1 for i in range (filas-1) for j in range (columnas-1) \
+# if TableroCuadros[i][j]=="1"))) and (PuntajeJugador2 == (sum( 1 for i in range (filas-1) \
+# for j in range (columnas-1) if TableroCuadros[i][j]=="2")) 
+
+  print ("Esta funcion devuelve las siguientes variables: PuntajeJugador1,PuntajeJugador2")
+
+
+# Definicion de funcion que imprime el puntaje final de la partida
+#------------------------------------------------------------------------------#
+
+def PuntajeFinal(PuntajeJugador1: int,PuntajeJugador2: int,filas: int,columnas: int) -> (str):
+
+# Precondicion:PuntajeJugador1 + PuntajeJugador2 == (filas-1)*(columnas-1)
+
+# Postcondicion: (resultado == PuntajeJugador1>PuntajeJugador2) or \
+# (resultado == PuntajeJugador1<PuntajeJugador2) or (resultado == PuntajeJugador1=PuntajeJugador2)
+
+    resultado = ""
+
+    print ("Esta funcion imprime el resultado de la partida")
+
+
+# Definicion de funcion que especifica el turno de juego
+#------------------------------------------------------------------------------#
+
+def Turno (TipoJugador: list,TableroHorizontal: list,TableroVertical: list,TableroCuadros: list,filas: int,columnas: int,azar: int) -> (list,list,list) :
+
+# Precondicion: (TipoJugador==1 or TipoJugador==2) and len(TableroHorizontal)==filas*(columnas-1) and \
+# len(TableroVertical)==(filas-1)*columnas and len(TableroCuadros)==(filas-1)*(columnas-1) and filas>=2 and \
+# columnas>=2 and (azar==1 or azar==2)
+
+# Postcondicion: (PrimerTurno = Jugador1(TableroHorizontal,TableroVertical,TableroCuadros,filas,columnas,TurnoActual) and \
+# SegundoTurno = Jugador2(TableroHorizontal,TableroVertical,TableroCuadros,filas,columnas,TipoJugador,TurnoActual)) or \
+# (PrimerTurno = Jugador2(TableroHorizontal,TableroVertical,TableroCuadros,filas,columnas,TipoJugador,TurnoActual) and \
+# SegundoTurno = Jugador1(TableroHorizontal,TableroVertical,TableroCuadros,filas,columnas,TurnoActual))
+    
+    PrimerTurno = Jugadorx    # Variable que hace el llamado al jugador al que le corresponde jugar de primero
+    SegundoTurno = Jugadory   # Variable que hace el llamado al jugador al que le corresponde jugar de segundo
+        	
+    print ("Esta funcion devuelve el orden de los turnos con las variables: PrimerTurno, SegundoTurno")
+
+
+# Definicion de funcion que imprime el menu del juego y permite escoger el tipo de juego
+#------------------------------------------------------------------------------#
+
+def ModoJuego()-> (int,bool):
+
+# Precondicion: True
+
+# Postcondicion: ((seleccion== 1) or (seleccion == 2) or (seleccion == 3) or (seleccion == 4) or (seleccion == 5)) and \
+# filas>=2 and columnas>=2 and len(TableroHorizontal) >=2 and len(TableroVertical) >=2 and len(TableroCuadros) >=2
+
+   seleccion = 0    # Variable que especifica la seleccion del menu hecha por el usuario
+
+   filas = 0    # Variable que guarda la cantidad de filas que quiere el usuario en el tablero
+   
+   columnas = 0    # Variable que guarda la cantidad de columnas que quiere el usuario en el tablero
+
+   print ("Esta funcion devuelve las siguientes variables: TableroHorizontal,TableroVertical,TableroCuadros,TipoJugador,filas,columnas")
+
+####################### PROGRAMA PRINCIPAL #####################################
+
+TableroHorizontal = []   # Lista que guarda la matriz del tablero de rayas horizontales
+
+TableroVertical = []    # Lista que guarda la matriz del tablero de rayas verticales
+
+TableroCuadros = []    # Lista que guarda la matriz del tablero de cuadros
+
+TipoJugador = 0    # Variable que almacena el tipo de jugador que es jugador 2, si es humano o maquina
+
+filas = 0    # Variable que especifica la cantidad de filas que se usaran en los tableros
+
+columnas = 0    # Variable que especifica la cantidad de columnas que se usaran en los tableros
+
+azar = 0    # Variable que especifica el jugador que empieza a jugar de primero en caso de ser humano vs humano
+
+TurnoActual = 0    # Variable que especifica cual jugador esta jugando al momento
+
+PuntajeJugador1 = 0    # Variable que almacena la puntuacion del jugador 1
+
+PuntajeJugador2 = 0     # Variable que almacena la puntuacion del jugador 2
+
+MovimientosMaximos = 0    # Variable que almacena la cantidad maxima de rayas posibles
+
+
+# Precondicion: True // Como toda la interaccion del usuario es con las funciones, las precondiciones de estas seran las que
+# especifiquen todos los datos validos en el programa
+
+print ("Juego Connect the dots!")
+
+# Postcondicion: all((TableroCuadros[i][j] != "0") for i in range(filas-1) for j in range(columnas-1))

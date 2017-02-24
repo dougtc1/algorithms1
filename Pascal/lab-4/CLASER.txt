@@ -1,0 +1,54 @@
+// programa escrito por landaeta,
+// para explicar mejor las estructuras :)
+
+// vamos a imaginar un tipo de dato mas interesante:
+// el tipo de dato videojuego:
+
+// nombre:                    que sera un string
+// numero de desarrolladores: que sera un int
+// niveles:                   que sera un int
+// puntuacion:                que sera un float
+
+
+program Project1;
+
+// lo primero que hago es construir el tipo
+
+type videojuego = record
+     nombre : string[30];
+     nNivel : integer;
+     ncPunt : real
+     end;
+
+// ahora que el tipo compuesto (registro) ya esta
+// declarado, puedo usarlo como variable !!
+
+var
+   AC4    : videojuego;
+   salida : integer;
+begin
+
+  // ahora, vamos a hacer algunas asignaciones a los campos
+  // de nuestro registro !!
+
+  // esto lo haremos mediante el operador punto!
+  // es decir:
+  // NOMBRE-DE-LA-VARIABLE.PUNTO.NOMBRE-DEL-CAMPO
+  AC4.nombre:= 'Assassins creed 4 BF';
+  AC4.nNivel:= 10;
+
+  // tambien podemos combinarlo con lectura habitual
+  writeln('asigne puntuacion a AC4');
+  readln(AC4.ncPunt);
+
+  // Imprimiremos los campos de nuestra variable
+
+  writeln('El videojuego es :', AC4.nombre);
+  writeln('y tiene aprox ', AC4.nNivel, ' niveles');
+  writeln('con una puntuacion de: ', AC4.ncPunt);
+
+
+  writeln('pres 0 y enter para salir');
+  readln(salida);
+end.
+     

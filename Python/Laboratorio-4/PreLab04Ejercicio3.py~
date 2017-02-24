@@ -1,0 +1,80 @@
+#
+# Lab04Ejercicio2.py
+# 
+# Descripcion: Este programa recibe 9 elementos que conforman una matriz de 3x3
+# y calcula si es diagonal.
+# 
+# Autor: Douglas Torres
+# Ultima modificacion: 02/05/2014
+#
+# Constantes:
+#   N = 10
+#
+# Variables:
+# 	suma : integer // Variable que gurada la suma de los numeros del arreglo 
+# 	i : string //Variable de iteracion que se usa en el invariante
+# 	cota : integer // Variable que guarda la cota
+#
+
+# Entrada de datos
+
+numeradored=0
+numeradorin=0
+i=0
+
+class Estudiante:
+	edad = 1
+	nombre = str("")
+	indice = 1.0
+	
+
+N=int(input("Inserte el numero de estudiantes: "))
+
+grupo = [ Estudiante() for x in range(N)]
+
+cota=N-i
+
+for i in range (N):
+	print("Estudiante:",i+1)
+	grupo[i].edad=int(input("Introduzca la edad: "))
+	grupo[i].nombre=str(input("Introduzca el nombre: "))
+	grupo[i].indice=float(input("Introduzca el indice: "))
+	assert (i<N)
+
+est = Estudiante() 
+# Precondicion
+
+
+try:
+	assert (0<est.edad<=130 and 1.0<=est.indice<=5.0 and len(est.nombre) >0 \
+			and 0<=i<N and N>0)
+except AssertionError:
+  print ("La Precondicion no se cumple.")
+  quit()
+
+# Calculo de datos
+
+for i in range (N):
+	numeradored = numeradored + grupo[i].edad
+	
+	numeradorin = numeradorin + grupo[i].indice
+
+	assert (0<=i<N and N>0)
+
+promedioed = numeradored/N
+
+promedioin = numeradorin/N
+
+# Postcondicion
+
+try:
+	assert (promedioed==numeradored/N and promedioin==numeradorin/N and \
+			promedioed>0 and promedioin>0)
+except AssertionError:
+	print ("La Postcondicion no se cumple.")
+	quit()
+
+# Salida de datos
+
+print ("El promedio de edad es =",promedioed,"\n"
+		"y el promedio de indice es =",promedioin)

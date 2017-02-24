@@ -1,0 +1,66 @@
+(*
+ *  Ejercicio 6 del laboratorio 3
+ *
+ *  Descripcion: El siguiente programa especifica si un numero
+ *  dado por el usuario es un numero primo o no, y en caso que
+ *  no lo sea da los factores primos del mismo
+ *  Autor: Douglas Torres
+ *  Ultima modificacion: 16/03/2014
+ *)
+
+program Lab03Ejercicio6;
+
+var
+   n	   : integer;
+   i	   : integer;
+   esPrimo : string;
+   j	   : integer;
+begin
+
+   (* Entrada de datos *)
+
+   writeln  ('Introduzca un numero n y se le dira si es primo o no.');
+   writeln ('En caso de que no lo sea se le daran los factores primos de n');
+   readln (n);
+
+   {Precondicion: n in% Z /\ n > 0}
+
+   (* Calculo de datos *)
+
+   if (n=1) then
+      esPrimo := 'si es primo'
+   else
+   begin
+      
+      i := 2;
+
+      while (i<=n) do
+      begin
+	 if ((n mod i)=0) and (n=i) then
+	 begin
+	    esPrimo := 'si es primo';
+	    i := n+1;
+	 end
+	 else if ((n mod i)=0) and (n<>i) then
+	 begin
+	    esPrimo := 'no es primo';
+	    writeln ('Estos son los divisores de ',n);
+	    for j:=1 to n-1 do
+	    begin
+	       if (n mod j = 0) then
+		  writeln (j:4);
+	    end;
+	    i := n+1
+	 end
+	 else
+	    i := i+1;
+      end;
+   end;
+
+   {Post:i,j %in Z /\ 2<=i<=n+1 /\ 1<=j<=n-1}
+	 
+   (* Salida de resultados *)
+   
+   writeln ('El numero ',n,' ',esPrimo);
+   readln;
+end.

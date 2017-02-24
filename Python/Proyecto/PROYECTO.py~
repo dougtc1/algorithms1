@@ -1,0 +1,223 @@
+# 
+# Proyecto-primera_entrega.py
+#
+# Descripcion: Este es un juego llamado "Connect TableroHorizontale dots" en el que dos
+# jugadores, bien sea persona vs maquina o persona vs persona, tratan de
+# completar la mayor cantidad de cuadros en un tablero de dimensiones
+# elegidas por el usuario.
+#
+# Autores:
+# Roberto Camara Carnet:11-10235 Grupo: 46
+# Douglas Torres Carnet:11-11027 Grupo:28
+#
+# Ultima modificacion: ??/06/2014
+#
+
+
+# Importacion de la libreria que permite escoger una posicion a marcar
+# al azar a la computadora
+
+from random import *
+
+# Definicion de Clase
+
+class Jugadores:
+	NombreJugador1 = ""
+	NombreJugador2 = ""
+
+grupo = Jugadores()
+
+# Definicio de funciones
+
+################################################################################
+######################## F U N C I O N E S #####################################
+################################################################################
+
+# Definicion de funcion que inicializa los datos del programa
+#------------------------------------------------------------------------------#
+
+def Inicializacion (filas: int, columnas: int) -> (list,list,list):
+
+# Precondicion: filas>=2 and columnas>=2
+
+# Postcondicion: len(TableroHorizontal)==filas*(columnas-1) and len(TableroVertical)==(filas-1)*columnas and \
+# len(TableroCuadros)==(filas-1)*(columnas-1) and all((TableroHorizontal[i][j] == 0) for i in range(filas) \
+# for j in range(columnas-1))and ((TableroVertical[i][j] == 0) for i in range(filas-1) \
+# for j in range(columnas) ((TableroCuadros[i][j] == 0) for i in range(filas-1) for j in range(columnas-1)))
+
+    TableroCuadros = []
+    TableroHorizontal = []
+    TableroVertical = []
+    
+    for i in range(filas):
+        TableroHorizontal.append([])
+        for j in range(columnas-1):
+            TableroHorizontal[i].append("0")
+
+    for i in range(filas-1):
+        TableroVertical.append([])
+        for j in range(columnas):
+            TableroVertical[i].append("0")
+
+    for i in range(filas-1):
+        TableroCuadros.append([])
+        for j in range(columnas-1):
+            TableroCuadros[i].append("0")
+
+
+    return TableroHorizontal,TableroVertical,TableroCuadros
+
+# Definicion de funcion que imprime el tablero cada vez que se modifica
+#------------------------------------------------------------------------------#
+
+def ImprimirTablero(TableroHorizontal: list, TableroVertical: list, TableroCuadros:list) -> (list,list,list):
+#Precondicion: len(TableroHorizontal) >=2 and len(TableroVertical) >=2 and len(TableroCuadros) >=2
+#Postcondicion: True // Esta funcion no modifica ninguna variable que recibe, solo imprime los tableros en un formato mas amigable para el usuario
+     
+	print("***HORIZONTAL***")
+	print()
+	
+	
+	for i in TableroHorizontal:
+		print(" ".join(i))
+		
+	print("***VERTICAL***")
+	print()
+	
+	for i in TableroVertical:
+		print(" ".join(i))
+		
+	print("***CUADROS***")
+	print()
+	
+	for i in TableroCuadros:
+		print(" ".join(i))
+	
+
+# Definicion de funcion que permite al jugador 1 hacer su jugada
+#------------------------------------------------------------------------------#
+
+def Jugador1(TableroHorizontal: list,TableroVertical: list,TableroCuadros: list,filas: int,columnas: int,TurnoActual: int) -> (list,list,list,int):
+# Precondicion: len(TableroHorizontal)==filas*(columnas-1) and len(TableroVertical)==(filas-1)*columnas and len(TableroCuadros)==(filas-1)*(columnas-1) and filas>=2 and columnas>=2 and (TurnoActual==2)
+
+#Postcondicion: len(TableroHorizontal)==filas*(columnas-1) and len(TableroVertical)==(filas-1)*columnas and len(TableroCuadros)==(filas-1)*(columnas-1)
+    
+    # Aqui se usa un while para definir el turno de cada jugador
+    
+    turno = True
+    
+    TurnoActual = 1
+    
+    while (turno):
+
+        print ("Turno jugador 1")
+
+        opcion = int(input("Presione 1 para horizontal y 2 para vertical: "))
+
+        if (opcion == 1):
+            TableroHorizontal = MarcarLineaHorizontal(TableroHorizontal)
+            
+        elif (opcion == 2):
+            TableroVertical = MarcarLineaVertical(TableroVertical)
+            
+        else:
+            quit()
+        
+ #       print (HacerCuadros(TableroHorizontal,TableroVertical,TableroCuadros,filas,columnas,1,turno))
+    
+        TableroCuadros,turno = HacerCuadros(TableroHorizontal,TableroVertical,TableroCuadros,filas,columnas,1,turno)
+        
+#        print(turno)
+
+        ImprimirTablero(TableroHorizontal,TableroVertical,TableroCuadros)
+    
+    return TableroHorizontal,TableroVertical,TableroCuadros,TurnoActual
+        
+
+# Definicion de funcion que permite al jugador 2 hacer su jugada
+#------------------------------------------------------------------------------#
+
+def Jugador2(TableroHorizontal: list,TableroVertical: list,TableroCuadros: list,filas: int,columnas: int,TipoJugador: int,TurnoActual: int) -> (list,list,list,int):
+# Precondicion: (TipoJugador==1 or TipoJugador==2) and len(TableroHorizontal)==filas*(columnas-1) and len(TableroVertical)==(filas-1)*columnas and len(TableroCuadros)==(filas-1)*(columnas-1) and filas>=2 and columnas>=2 and TurnoActual==1
+
+#Postcondicion: len(TableroHorizontal)==filas*(columnas-1) and len(TableroVertical)==(filas-1)*columnas and len(TableroCuadros)==(filas-1)*(columnas-1)
+
+    # Aqui se usa un while para definir el turno de cada jugador
+
+    turno = True
+    TurnoActual = 2
+
+    while (turno):
+
+        if (TipoJugador == 2):
+
+            print("Es humano","\n")
+
+            print("Turno jugador 2\n")
+
+            opcion = int(input("Presione 1 para horizontal y 2 para vertical: "))
+
+            if (opcion == 1):
+                TableroHorizontal = MarcarLineaHorizontal(TableroHorizontal)
+            
+            elif (opcion == 2):
+                TableroVertical = MarcarLineaVertical(TableroVertical)
+                
+            else:
+                quit()
+            
+            TableroCuadros,turno = HacerCuadros(TableroHorizontal,TableroVertical,TableroCuadros,filas,columnas,2,turno)
+            
+            print (turno)
+
+            ImprimirTablero(TableroHorizontal,TableroVertical,TableroCuadros)
+        
+        else:
+
+            print("Es computadora","\n")
+
+            print("Turno jugador 2\n")
+            
+            if (all (TableroHorizontal[i][j] == 1 and TableroVertical[i][j] == 1 and TableroHorizontal[i+1][j] == 1 \
+                         for i in range (filas-2) for j in range (columnas-2))):
+                
+                TableroVertical[i][j+1] = "1"
+                
+                
+            elif(all ((TableroHorizontal[i][j] == 1) and (TableroVertical[i][j] == 1) and (TableroVertical[i][j+1] == 1) \
+                          for i in range (filas-2) for j in range (columnas-2))):
+                
+                TableroHorizontal[i+1][j] = "1"
+
+            
+            elif(all ((TableroHorizontal[i][j] == 1) and (TableroHorizontal[i+1][j] == 1) and (TableroVertical[i][j+1] == 1) \
+                          for i in range (filas-2) for j in range (columnas-2))):
+                
+                TableroVertical[i][j] = "1"
+            
+            elif(all ((TableroVertical[i][j] == 1) and (TableroHorizontal[i+1][j] == 1) and (TableroVertical[i][j+1] == 1) \
+                     for i in range (filas-2) for j in range (columnas-2))):
+                
+                TableroHorizontal[i][j] = "1"
+           
+            else:
+                
+                opcion = randint(1,2)
+
+                if (opcion == 1):
+                    i,j = randint(0,filas-2),randint(0,columnas-2)
+                    TableroHorizontal[i][j] = "1"
+            
+                elif (opcion == 2):
+                    i,j = randint(0,filas-2),randint(0,columnas-2)
+                    TableroVertical[i][j] = "1"
+                
+                else:
+                    quit()
+            
+            TableroCuadros,turno = HacerCuadros(TableroHorizontal,TableroVertical,TableroCuadros,filas,columnas,2,turno)
+            ImprimirTablero(TableroHorizontal,TableroVertical,TableroCuadros)
+            
+    return TableroHorizontal,TableroVertical,TableroCuadros,TurnoActual
+
+

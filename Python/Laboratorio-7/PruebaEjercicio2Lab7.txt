@@ -1,0 +1,29 @@
+Entradas Correctas
+
+1) N = 2
+
+	secuencia = [0,1]
+
+2) N = 5
+	
+	secuencia = [1,2,3,4,5]
+
+Entradas Incorrectas
+
+3) N = 1
+	
+	secuencia = [1]
+
+5) N = 0
+	
+	secuencia = []
+
+Salida Esperada
+
+1) resultado = [0,1]
+
+2) resultado = [1,1,2,3,5]
+
+3) La precondicion no se cumple
+
+4) La precondicion no se cumple

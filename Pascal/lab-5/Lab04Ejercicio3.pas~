@@ -1,0 +1,10 @@
+(*
+ *  Ejercicio 3 del laboratorio 4
+ *
+ *  Descripcion: El siguiente programa pide al usuario los coeficientes
+ *  de un polinomio y el valor de la X y se imprime la evaluacion
+ *  Autor: Douglas Torres
+ *  Ultima modificacion: 22/03/2014
+ *)
+
+program Lab04Ejercicio3;

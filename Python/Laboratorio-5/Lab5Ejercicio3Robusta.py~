@@ -1,0 +1,90 @@
+#
+# Lab05Ejercicio3.py
+# 
+# Descripcion: Este programa verifica si un numero entero positivo es perfecto
+#
+# Autor: Douglas Torres
+# Ultima modificacion: 30/04/2014
+#
+# Variables:
+#    n : integer // Variable que almacena un numero a verificar si es perfecto 
+#    esPerfecto : string //Variable que almacena el resultado de la verificacion
+#    i : integer // Variable de iteracion
+#    suma : integer // Variable que almacena la suma de los divisores de n
+#    cota : integer //
+#
+# Datos iniciales
+
+i = 1
+suma = 0
+esPerfecto = "no es un numero perfecto"
+seguir = True
+
+
+# Entrada de datos y precondicion
+while True:
+  try:
+    n = int(input("Introduzca un valor n y se le dira si es un numero perfecto: "))
+    assert(n>=2)
+    break
+  except:
+    print ("Debe ingresar un valor mayor o igual a 2.")
+
+# Calculo de datos
+
+cota = n-i
+
+# Verificacion del invariante al inicio
+
+try:
+  assert (1<=i<=n and suma == sum (1 for i in range(1,i) if n % i == 0 and n!=i))
+except:
+  print ("La verificacion del invariante fallo. 1")
+  quit()
+
+
+while (i<n):
+
+
+  # Verificacion del invariante en cada iteracion
+
+  try:
+    assert (1<=i<=n and suma == sum(i for i in range(1,i) if n % i == 0 and n !=i ))
+  except:
+    print ("La verificacion del invariante fallo.2")
+    quit()
+
+  # Verificacion de la cota positiva en cada iteracion
+
+  try:
+    assert (cota>=0)
+  except:
+    print ("La verificacion de la cota positiva fallo.")
+    quit()
+
+  # Verificacion de la cota decreciente en cada iteracion
+
+  try:
+    assert (cota>=n-i)
+  except:
+    print ("La verificacion de la cota decreciente fallo.")
+    quit()
+
+  if (n%i == 0 and n != i and seguir):
+    suma += i
+    if (suma == n):
+      esPerfecto = "es un numero perfecto"
+      seguir = False
+  i += 1
+  print(suma)
+# Postcondicion
+
+try:
+  assert (n==2 or (1<=i<=n and suma>0))
+except AssertionError:
+  print ("La Postcondicion no se cumple")
+  quit()
+
+# Salida de datos
+
+print ("El numero",n,esPerfecto)

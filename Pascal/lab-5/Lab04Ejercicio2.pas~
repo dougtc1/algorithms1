@@ -1,0 +1,24 @@
+(*
+ *  Ejercicio 2 del laboratorio 4
+ *
+ *  Descripcion: El siguiente programa pide al usuario los coeficientes
+ *  de un polinomio y el valor de la X y se imprime la evaluacion
+ *  Autor: Douglas Torres
+ *  Ultima modificacion: 21/03/2014
+ *)
+
+program Lab04Ejercicio2;
+
+begin
+
+   (* Entrada de datos*)
+
+   writeln;
+   writeln ('Introduzca los coeficientes de dicho polinomio');
+   for i := 0 to N do
+   begin
+      write ('Coeficiente de grado ',i:2, ' = ');
+      read (C[i])
+   end;
+
+   {Precondicion: N,C %in Z /\ (%forall i : 0<=i<=N : C[i])}

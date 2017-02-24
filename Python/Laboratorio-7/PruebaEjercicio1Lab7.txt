@@ -1,0 +1,35 @@
+Entradas Correctas
+
+1) N = 2
+
+	secuencia = [1,2]
+
+2) N = 5
+	
+	secuencia = [1,3,2,6,10]
+
+3) N = 3
+	
+	secuencia = [10,9,1]
+
+Entradas Incorrectas
+
+4) N = 1
+	
+	secuencia = [1]
+
+5) N = 0
+	
+	secuencia = []
+
+Salida Esperada
+
+1) resultado = "La lista es creciente"
+
+2) resultado = "La lista esta en desorden"
+
+3) resultado = "La lista es decreciente"
+
+4) La precondicion no se cumple
+
+5) La precondicion no se cumple
